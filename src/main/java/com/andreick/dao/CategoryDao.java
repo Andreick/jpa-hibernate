@@ -15,4 +15,13 @@ public class CategoryDao {
     public void register(Category category) {
         em.persist(category);
     }
+
+    public void update(Category category) {
+        em.merge(category);
+    }
+
+    public void delete(Category category) {
+        category = em.merge(category);
+        em.remove(category);
+    }
 }
