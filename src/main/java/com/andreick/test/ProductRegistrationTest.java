@@ -1,10 +1,10 @@
 package com.andreick.test;
 
+import com.andreick.dao.ProductDao;
 import com.andreick.model.Product;
+import com.andreick.util.JpaUtil;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.math.BigDecimal;
 
 public class ProductRegistrationTest {
@@ -16,13 +16,11 @@ public class ProductRegistrationTest {
         phone.setDescription("Muito legal");
         phone.setPrice(new BigDecimal("800"));
 
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("store");
-        EntityManager em = factory.createEntityManager();
+        EntityManager em = JpaUtil.getEntityManager();
+        ProductDao dao = new ProductDao(em);
 
         em.getTransaction().begin();
-
-        em.persist(phone);
-
+        dao.register(phone);
         em.getTransaction().commit();
 
         em.close();
