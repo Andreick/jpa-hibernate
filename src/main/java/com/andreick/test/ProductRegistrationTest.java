@@ -1,6 +1,7 @@
 package com.andreick.test;
 
 import com.andreick.dao.ProductDao;
+import com.andreick.model.Category;
 import com.andreick.model.Product;
 import com.andreick.util.JpaUtil;
 
@@ -11,10 +12,7 @@ public class ProductRegistrationTest {
 
     public static void main(String[] args) {
 
-        Product phone = new Product();
-        phone.setName("Xiaomi Redmi");
-        phone.setDescription("Muito legal");
-        phone.setPrice(new BigDecimal("800"));
+        Product phone = new Product("Xiaomi Redmi", "Muito legal", new BigDecimal("800"), Category.MOBILE_PHONES);
 
         EntityManager em = JpaUtil.getEntityManager();
         ProductDao dao = new ProductDao(em);
