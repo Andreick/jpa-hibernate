@@ -19,6 +19,17 @@ public class OrderDao {
         em.persist(order);
     }
 
+    public Order findById(Long id) {
+        return em.find(Order.class, id);
+    }
+
+    public Order findByIdWithClient(Long id) {
+        String jpql = "SELECT o FROM Order o JOIN FETCH o.client WHERE o.id = :id";
+        return em.createQuery(jpql, Order.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
+
     public BigDecimal getTotalSold() {
         String jpql = "SELECT SUM(o.totalPrice) FROM Order o";
         return em.createQuery(jpql, BigDecimal.class)

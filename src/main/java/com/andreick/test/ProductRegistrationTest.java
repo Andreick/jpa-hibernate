@@ -13,11 +13,11 @@ public class ProductRegistrationTest {
 
     public static void main(String[] args) {
 
+        DatabaseUtil.fillDb();
+
         EntityManager em = JpaUtil.getEntityManager();
-
-        DatabaseUtil.fillDb(em);
-
         ProductDao productDao = new ProductDao(em);
+
         Product productId1 = productDao.findById(1L);
         System.out.println(productId1);
 

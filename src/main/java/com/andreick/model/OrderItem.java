@@ -15,10 +15,10 @@ public class OrderItem {
     private BigDecimal unitPrice;
     private int quantity;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Product product;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Order order;
 
     public OrderItem() {
@@ -72,5 +72,16 @@ public class OrderItem {
 
     public BigDecimal getTotalPrice() {
         return unitPrice.multiply(new BigDecimal(quantity));
+    }
+
+    @Override
+    public String toString() {
+        return "OrderItem{" +
+                "id=" + id +
+                ", unitPrice=" + unitPrice +
+                ", quantity=" + quantity +
+                ", product=" + product +
+                ", order=" + order +
+                '}';
     }
 }
