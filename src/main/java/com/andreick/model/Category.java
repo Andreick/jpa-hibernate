@@ -1,40 +1,24 @@
 package com.andreick.model;
 
-import javax.persistence.*;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "categories")
 public class Category {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
+    @EmbeddedId
+    private CategoryId id;
 
     public Category() {
     }
 
     public Category(String name) {
-        this.name = name;
-    }
-
-    public Long getId() {
-        return id;
+        id = new CategoryId(name, "composite");
     }
 
     public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "Category{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+        return id.getName();
     }
 }

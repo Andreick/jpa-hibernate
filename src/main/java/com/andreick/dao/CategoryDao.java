@@ -1,6 +1,7 @@
 package com.andreick.dao;
 
 import com.andreick.model.Category;
+import com.andreick.model.CategoryId;
 
 import javax.persistence.EntityManager;
 
@@ -23,5 +24,9 @@ public class CategoryDao {
     public void delete(Category category) {
         category = em.merge(category);
         em.remove(category);
+    }
+
+    public Category findById(CategoryId id) {
+        return em.find(Category.class, id);
     }
 }
